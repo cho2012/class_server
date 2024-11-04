@@ -7,6 +7,12 @@ import {
 } from "typeorm";
 import bcrypt from "bcryptjs";
 
+export enum Gender {
+  MAEL = "male",
+  FEMALE = "female",
+  OTHER = "other",
+}
+
 @Entity()
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
@@ -22,9 +28,6 @@ export class User extends BaseEntity {
   password: string;
 
   @Column({ nullable: true })
-  photoUrl: string;
-
-  @Column({ nullable: true })
   photoBase64: string;
 
   @Column({ nullable: true })
@@ -32,6 +35,9 @@ export class User extends BaseEntity {
 
   @Column({ nullable: true })
   studentNum: string;
+
+  @Column({ nullable: true })
+  gender: string;
 
   @BeforeInsert()
   async hashPassword() {

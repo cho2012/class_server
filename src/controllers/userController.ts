@@ -3,10 +3,11 @@ import User from "../entities/user";
 
 interface UpdateUserData {
   name?: string;
-  photoUrl?: string;
+
   address?: string;
   studentNum?: string;
   photoBase64?: string;
+  gender?: string;
 }
 
 export const updateUser = async (req: Request, res: Response) => {
@@ -24,15 +25,22 @@ export const updateUser = async (req: Request, res: Response) => {
     }
 
     // Update user fields
-    const { name, photoUrl, address, studentNum, photoBase64 }: UpdateUserData =
-      req.body;
-
-    Object.assign(user, {
+    const {
       name,
-      photoUrl,
+
       address,
       studentNum,
       photoBase64,
+      gender,
+    }: UpdateUserData = req.body;
+
+    Object.assign(user, {
+      name,
+
+      address,
+      studentNum,
+      photoBase64,
+      gender,
     });
 
     await user.save();
